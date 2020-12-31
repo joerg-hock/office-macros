@@ -16,8 +16,8 @@ Private CellCount As Integer   ' Maximal number of cells
 '   -   t       Table       the table-object to iterate
 '   -   head    Integer     the number of head cells
 '   -   body    Integer     the number of cells that represent a row
-Public Sub Init(t As Table, head As Integer, body As Integer)
-    Set Tbl = t
+Public Sub Init(T As Table, head As Integer, body As Integer)
+    Set Tbl = T
     CellCount = Tbl.Range.Cells.count
     HeadCount = head
     BodyCount = body
@@ -69,3 +69,20 @@ End Function
 Public Function Index() As Integer
     Index = RowIndex
 End Function
+
+' Function:     SetTextColor
+' Description:  set text color of whole row
+' Parameter:
+'   -   Color   WdColorIndex
+Public Sub SetTextColor(Color As WdColorIndex)
+    If Me.Valid() = False Then
+        Exit Sub
+    End If
+    
+    Dim Row, i As Integer
+    Row = CellOffset + ColumnCount * RowI
+    
+    For i = 1 To ColumnCount
+        Tbl.Range.Cells(Row + i).Range.Font.ColorIndex = Color
+    Next i
+End Sub
