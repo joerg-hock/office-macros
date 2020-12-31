@@ -128,7 +128,6 @@ ErrHandler:
     "Decription: " & Err.Description, vbOKOnly + vbCritical, "Error"
 End Sub
 
-
 ' Function:     GetEntireDocumentContent
 ' Description:  Get the text from a DOC-File
 ' Parameters:
@@ -145,3 +144,52 @@ Function GetEntireDocumentText(FileName As String) As String
     
     GetEntireDocumentText = Text
 End Function
+
+' Function:     GetVariable
+' Description:  Get a document variable
+' Parameters:
+'   -   Name    String      variable name
+Public Function GetVariable(Name As String) As String
+    Dim adv As Variable
+    Dim res As String
+    res = ""
+    For Each adv In ActiveDocument.Variables
+        If adv.Name = Name Then
+          res = adv.Value
+        End If
+    Next adv
+    
+    GetVariable = res
+End Function
+
+' Function:     DeleteVariable
+' Description:  deletes a document variable
+' Parameters:
+'   -   Name    String      variable name
+Public Sub DeleteVariable(Name As String)
+    Dim adv As Variable
+    For Each adv In ActiveDocument.Variables
+        If adv.Name = Name Then
+          adv.Delete
+          Exit Sub
+        End If
+    Next adv
+End Sub
+
+' Function:     SetVariable
+' Description:  sets a document variable
+' Parameters:
+'   -   Name    String      variable name
+'   -   Value   String
+Public Sub SetVariable(Name As String, Value As String)
+    Dim adv As Variable
+    For Each adv In ActiveDocument.Variables
+        If adv.Name = Name Then
+          adv.Value = Value
+          Exit Sub
+        End If
+    Next adv
+    ActiveDocument.Variables.Add Name, Value
+End Sub
+
+
