@@ -1,3 +1,20 @@
+
+' Function:     Exists
+' Description:  Check if the bookmark exists
+' Parameters:
+'   -   title   String      name of the bookmark
+' Return:       Boolean
+Public Function Exists(Name As String) As Boolean
+    Dim bm As Bookmark
+    For Each bm In ActiveDocument.Bookmarks
+        If bm.Name = Name Then
+            Exists = True
+            Exit Function
+        End If
+    Next
+    Exists = False
+End Function
+
 ' Function:     GetByName
 ' Description:  Get a bookmark by it's name
 ' Parameters:
