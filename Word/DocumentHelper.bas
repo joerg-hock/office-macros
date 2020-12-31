@@ -192,4 +192,14 @@ Public Sub SetVariable(Name As String, Value As String)
     ActiveDocument.Variables.Add Name, Value
 End Sub
 
-
+' Function:     SaveAsDraft
+' Description:  saves the active document as a draft version and activates revision tracking
+' Parameters:   none
+Public Sub SaveAsDraft()
+    ActiveDocument.SaveAs2 Replace(ActiveDocument.FullName, ".docx", "_DRAFT.docx")
+    
+    DocumentHelper.InsertWatermarkAllSections "DRAFT"
+    
+    ActiveDocument.TrackRevisions = True
+    ActiveDocument.Save
+End Sub
