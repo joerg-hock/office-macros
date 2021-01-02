@@ -81,3 +81,21 @@ Public Function ConvToHex(vIn As Variant) As Variant
     
     Set oD = Nothing
 End Function
+
+' Function:     StartsWith
+' Description:  Checks if the string starts with a defined prefix
+' Parameters:
+'   -   str     String      String to check
+'   -   prefix  String      needly string
+Public Function StartsWith(str As String, prefix As String) As Boolean
+    StartsWith = (Left(UCase(str), Len(prefix)) = UCase(prefix))
+End Function
+
+' Function:     EndsWith
+' Description:  Checks if the string ends with a defined ending
+' Parameters:
+'   -   str     String      String to check
+'   -   ending  String      needly string
+Public Function EndsWith(str As String, ending As String) As Boolean
+     EndsWith = (Right(Trim(UCase(str)), Len(ending)) = UCase(ending))
+End Function
